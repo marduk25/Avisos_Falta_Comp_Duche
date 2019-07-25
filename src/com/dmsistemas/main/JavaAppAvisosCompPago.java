@@ -130,17 +130,22 @@ public class JavaAppAvisosCompPago extends Conexion {
                     this.FECHA_PAGO = rs.getDate("FECHA_PAGO");
                     this.REFERENCIA = rs.getString("REFERENCIA");
                     this.IMPORTE = rs.getString("IMPORTE");
+                    @SuppressWarnings("UnusedAssignment")
                     Date nuevaFecha = new Date();
                     Calendar cal = Calendar.getInstance();
                     cal.setTime(this.FECHA_PAGO);
                     cal.add(Calendar.MONTH, 1);
                     nuevaFecha = cal.getTime();
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
-                    System.out.println(sdf.format(nuevaFecha));
+                    // System.out.println(sdf.format(nuevaFecha));
                     Date fecha = new Date();
-                    System.out.println(sdf.format(fecha));
-                    String f1 = nuevaFecha.toString().substring(0, 7);
-                    String f2 = fecha.toString().substring(0, 7);
+                    // System.out.println(sdf.format(fecha));
+                    String f1 = sdf.format(fecha);
+                    String f2 = sdf.format(nuevaFecha);
+                    // String f1 = nuevaFecha.toString().substring(0, 7);
+                    // String f2 = fecha.toString().substring(0, 7);
+                    System.out.println(f1);
+                    System.out.println(f2);
                     if (f1.equals(f2)) {
                         Statement st1 = this.getCnportal().createStatement();
                         ResultSet rs1 = st1.executeQuery("SELECT TOP(1) CORREO FROM USUARIO WHERE RFC='" + this.RFC_E + "'");
@@ -213,7 +218,7 @@ public class JavaAppAvisosCompPago extends Conexion {
         MimeMultipart multiParte = new MimeMultipart();
         BodyPart imagen = new MimeBodyPart();
         DataSource fds = new FileDataSource("C:\\img\\duche.png");
-//        DataSource fds = new FileDataSource("/home/dmsistemas/Escritorio/logo2.png");
+        // DataSource fds = new FileDataSource("/home/dmsistemas/Escritorio/logo2.png");
         imagen.setDataHandler(new DataHandler(fds));
         imagen.setHeader("Content-ID", "<image>");
 
@@ -230,6 +235,7 @@ public class JavaAppAvisosCompPago extends Conexion {
         //message.addRecipients(Message.RecipientType.TO, us.getCorreo());
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(this.CORREO));
         message.addRecipient(Message.RecipientType.CC, new InternetAddress("duche.proveedores@gmail.com"));
+        message.addRecipient(Message.RecipientType.BCC, new InternetAddress("marduk25@gmail.com"));
 
 // Se rellena el subject
         message.setSubject("AVISO DE FALTA DE COMPROBANTE");
