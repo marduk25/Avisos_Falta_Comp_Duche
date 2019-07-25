@@ -235,7 +235,7 @@ public class JavaAppAvisosCompPago extends Conexion {
         //message.addRecipients(Message.RecipientType.TO, us.getCorreo());
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(this.CORREO));
         message.addRecipient(Message.RecipientType.CC, new InternetAddress("duche.proveedores@gmail.com"));
-        message.addRecipient(Message.RecipientType.BCC, new InternetAddress("marduk25@gmail.com"));
+       // message.addRecipient(Message.RecipientType.BCC, new InternetAddress("marduk25@gmail.com"));
 
 // Se rellena el subject
         message.setSubject("AVISO DE FALTA DE COMPROBANTE");
